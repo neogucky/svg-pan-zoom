@@ -555,6 +555,22 @@ SvgPanZoom.prototype.panBy = function(point) {
 }
 
 /**
+ * Pan the graph to center a child object
+ *
+ * @param  Element  
+ */
+SvgPanZoom.prototype.panTo = function(element) {
+	
+	var elementBound = element.getBoundingClientRect();
+	var parentBound = this.viewport.getBoundingClientRect();
+
+	//center the 0/0 position
+	var centerZero = {'x' :  this.width / 2 + parentBound.x, 'y' : this.height / 2 +parentBound.y};
+	
+	return {'x': centerZero.x - elementBound.x + elementBound.width/2 , 'y': centerZero.y - elementBound.y + elementBound.height/2};
+}
+
+/**
  * Get pan vector
  *
  * @return {Object} {x: 0, y: 0}
